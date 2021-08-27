@@ -1,0 +1,17 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>Local Library (Authors)!!!</h1>
+
+<h2>Dynamic content</h2>
+
+
+  <p>The library has authors at number: {{ num_authors }} </p>
+  {% comment %} <p>There are: {{ authors_last_name }}</p> {% endcomment %}
+
+{% for aut in author_last_name %}
+<p>{{aut}}</p>
+
+{% endfor %}
+
+{% endblock %}

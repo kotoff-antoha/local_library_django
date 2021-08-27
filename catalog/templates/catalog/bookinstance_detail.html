@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block sidebar-bookinstance %}
+    {% if perms.catalog.can_bookinstance_accounting %}
+        <hr>
+        <ul class="sidebar-nav">
+            <li><a href="{% url 'bookinstance_update' bookinstance.id %}">Update book</a></li>
+            <li><a href="{% url 'bookinstance_delete' bookinstance.id %}">Delete book</a></li>
+        </ul>
+    {% endif %}
+{% endblock sidebar-bookinstance %}
+
+{% block content %}
+    <h1>Title: {{ bookinstance.id }}</h1>
+
+    <p><strong>Book:</strong> <a href="{% url 'book-detail' bookinstance.book.id %}">{{ bookinstance.book }}</a></p> <!-- author detail link not yet defined -->
+    <p><strong>Imprint:</strong> {{ bookinstance.imprint }}</p>
+    <p><strong>Due back:</strong> {{ bookinstance.due_back }}</p>
+    <p><strong>Status:</strong> {{ bookinstance.get_status_display }}</p>
+    <p><strong>Borrower:</strong> {{ bookinstance.borrower }}</p>
+
+{% endblock %}

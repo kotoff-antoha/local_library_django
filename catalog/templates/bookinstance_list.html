@@ -1,0 +1,48 @@
+{% extends "base_generic.html" %}
+
+{#{% block sidebar-book %}#}
+{#    {% if perms.catalog.add_book %}#}
+{#        <hr>#}
+{#        <ul class="sidebar-nav">#}
+{#          <li><a href="{% url 'book_create' %}">Create book</a></li>#}
+{#        </ul>#}
+{#    {% endif %}#}
+{#{% endblock sidebar-book %}#}
+
+{% block sidebar-bookinstance %}
+    {% if perms.catalog.can_bookinstance_accounting %}
+        <hr>
+        <ul class="sidebar-nav">
+            <li><a href="{% url 'bookinstance_create' %}">Add book instance</a></li>
+        </ul>
+    {% endif %}
+{% endblock sidebar-bookinstance %}
+
+{% block content %}
+    <h1>Book Instance List</h1>
+
+    {% if bookinstance_list %}
+        <ul>
+            {% for instance in bookinstance_list %}
+                <li>
+                    {#        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})#}
+                    <a href="{% url 'bookinstance-detail' instance.id %}">{{ instance }}</a>
+                    {% comment %} <a href="">{{ book.title }}</a> ({{ book.author }}) {% endcomment %}
+                </li>
+            {% endfor %}
+        </ul>
+        <form action="" method="post">
+            {% csrf_token %}
+            <p>Choose the instance:</p>
+            <select name="instance_title">
+                {% for el in create_select %}
+                    <option value="{{ el }}">{{ el }}</option>
+                {% endfor %}
+
+            </select>
+            <input type="submit" value="Find">
+        </form>
+    {% else %}
+        <p>There are no book instances in the library.</p>
+    {% endif %}
+{% endblock %}

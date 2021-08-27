@@ -1,0 +1,21 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>Local Library (Books)!!!</h1>
+
+<h2>Dynamic content</h2>
+
+  <p>There are books in the library: {{ num_books }} </p>
+
+  <p>Books:</p>
+
+<ol>
+{% for book in books_all%}
+
+<li class="books">{{book}}</li>
+
+{% endfor %}
+</ol>
+
+
+{% endblock %}
